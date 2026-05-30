@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper-50 text-ink antialiased;
+    background-image:
+      radial-gradient(circle at top, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 55%),
+      linear-gradient(180deg, rgba(255, 248, 245, 0.96), rgba(249, 239, 232, 0.98));
+  }
+}
+
+@layer components {
+  .cinema-grain {
+    position: relative;
+  }
+
+  .cinema-grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.16;
+    mix-blend-mode: multiply;
+  }
+
+  .glass-panel {
+    @apply rounded-[2rem] border border-white/70 bg-white/55 shadow-soft backdrop-blur-xl;
+  }
+
+  .paper-card {
+    @apply rounded-[1.75rem] border border-white/80 bg-white/80 shadow-soft;
+    box-shadow: 0 16px 50px rgba(92, 58, 46, 0.10), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+
+  .soft-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/65 px-4 py-2 text-sm text-rosewood shadow-sm backdrop-blur;
+  }
+
+  .admin-input {
+    @apply mt-2 w-full rounded-2xl border border-paper-200 bg-white/80 px-4 py-3 text-sm text-ink shadow-sm outline-none transition focus:border-blush-300 focus:ring-4 focus:ring-blush-100;
+  }
+
+  .admin-label {
+    @apply text-sm font-medium text-rosewood;
+  }
+
+  .emotional-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-rosewood px-5 py-3 text-sm font-medium text-white shadow-glow transition duration-300 hover:-translate-y-0.5 hover:bg-blush-500;
+  }
+
+  .secondary-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-paper-300 bg-white/70 px-5 py-3 text-sm font-medium text-ink shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-white;
+  }
+}
