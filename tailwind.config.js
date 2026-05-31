@@ -2,6 +2,7 @@ import forms from '@tailwindcss/forms';
 
 export default {
   content: [
+    './index.html',
     './resources/**/*.blade.php',
     './resources/**/*.js',
     './app/**/*.php',
