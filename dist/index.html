@@ -185,6 +185,25 @@
       content: ''; position: absolute; inset: 1rem; border-radius: 1.4rem; border: 1px solid rgba(154, 79, 94, 0.14);
       background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02)), repeating-linear-gradient(90deg, rgba(154,79,94,0.04) 0 1px, transparent 1px 14px);
     }
+
+    /* Polaroid collage styles */
+    .polaroid-stage { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
+    .polaroid { position: absolute; width: 78%; max-width: 340px; background: #fff; padding: 0.6rem 0.6rem 0.9rem; box-shadow: 0 18px 40px rgba(75,41,34,0.08); border-radius: 0.7rem; transform-origin: center; transition: transform 450ms ease, opacity 450ms ease; }
+    .polaroid img { width: 100%; height: 220px; -o-object-fit: cover; object-fit: cover; display: block; border-radius: 0.5rem; }
+    .polaroid--back { transform: translate(-18%, 8%) rotate(-6deg) scale(0.92); opacity: 0.9; z-index: 1; }
+    .polaroid--mid { transform: translate(6%, -4%) rotate(4deg) scale(0.98); opacity: 0.98; z-index: 2; }
+    .polaroid--front { transform: translate(0%, 0%) rotate(-1deg) scale(1); z-index: 3; }
+
+    .polaroid.hidden { opacity: 0; transform: translateY(8px) scale(0.98); }
+
+    .polaroid-caption { margin-top: 0.5rem; font-size: 0.88rem; color: var(--muted); text-align: center; }
+    .mini-polaroid { background: #fff; padding: 0.45rem; border-radius: 0.5rem; box-shadow: 0 8px 20px rgba(75,41,34,0.06); text-align: center; }
+    .mini-polaroid img { width: 8.2rem; height: 8.2rem; -o-object-fit: cover; object-fit: cover; display: block; border-radius: 0.35rem; }
+    .mini-polaroid figcaption { font-size: 0.72rem; color: var(--muted); margin-top: 0.35rem; }
+    .opening-frames { display:flex; gap:0.6rem; justify-content:center; align-items:center; }
+    .opening-frames .mini-polaroid:nth-child(1) { transform: rotate(-6deg); }
+    .opening-frames .mini-polaroid:nth-child(2) { transform: rotate(3deg); }
+    .opening-frames .mini-polaroid:nth-child(3) { transform: rotate(-2deg); }
     .site-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
     .site-stat { padding: 1rem; border-radius: 1.15rem; background: rgba(255, 255, 255, 0.66); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: var(--shadow-soft); }
     .site-stat__value { font-size: 2rem; line-height: 1; font-family: 'Georgia', 'Times New Roman', serif; }
@@ -271,9 +290,42 @@
       .site-section { padding: 3.25rem 0; }
       .site-hero__title { font-size: clamp(2.2rem, 12vw, 3.6rem); }
     }
+
+    /* Countdown component (modern, minimal, romantic) */
+    .countdown-card {
+      padding: 1rem 1rem 1.1rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.60));
+      border: 1px solid rgba(255,255,255,0.8);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(75,41,34,0.08);
+      border-radius: calc(var(--radius-lg) - 0.4rem);
+      display: flex; flex-direction: column; gap: 0.7rem; align-items: center; text-align: center;
+      max-width: 22rem;
+    }
+
+    .countdown-phrase { font-size: 0.92rem; color: var(--muted); letter-spacing: 0.01em; }
+    .countdown-phrase .countdown-heart { color: var(--accent-2); margin-left: 0.35rem; font-size: 0.95rem; }
+
+    .countdown-grid { display: flex; gap: 0.9rem; align-items: center; justify-content: center; flex-wrap: nowrap; }
+    .countdown-unit { display: flex; flex-direction: column; align-items: center; min-width: 3.6rem; }
+    .countdown-number {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-weight: 700; color: var(--text); font-size: 1.55rem; line-height: 1; letter-spacing: -0.02em;
+      transition: transform 220ms ease, opacity 220ms ease;
+      display: inline-block;
+    }
+    .countdown-number.is-anim { transform: translateY(-6px) scale(1.06); }
+    .countdown-label { margin-top: 0.28rem; font-size: 0.72rem; color: var(--muted); text-transform: lowercase; }
+
+    @media (max-width: 520px) {
+      .countdown-grid { gap: 0.5rem; }
+      .countdown-number { font-size: 1.2rem; }
+      .countdown-card { max-width: 100%; }
+    }
+
   </style>
-  <script type="module" crossorigin src="/assets/index-BABJpSSs.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-D9LJLSIj.css">
+  <script type="module" crossorigin src="/assets/index-BWo8GJyq.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C-hFuhyK.css">
 </head>
 <body class="site-shell" x-data="heroGlow()">
   <div class="site-grain"></div>
@@ -307,7 +359,7 @@
         <p class="site-pill">para Samara</p>
         <h1 class="site-hero__title">Para Samara, você virou a minha história do avesso (e isso foi bom)..</h1>
         <p class="site-hero__lead">Uma cápsula do tempo para guardar tudo o que o nosso amor nunca esqueceu.</p>
-        <p class="site-hero__kicker">aeroporto de mosquito • vida • princesa</p>
+        <p class="site-hero__kicker">aeroporto de mosquito • vida • pincesa</p>
 
         <div class="site-actions">
           <a href="#historia" class="site-button">começar a história</a>
@@ -322,26 +374,50 @@
             <p class="site-copy" style="margin-top: 0.75rem;">Entre a tela iluminada e o silêncio bonito do começo, a nossa história encontrou o caminho mais certo: o seu sorriso.</p>
           </div>
 
-          <div class="site-panel" x-data="loveTimer('2025-06-13T00:00:00-03:00')" x-init="init">
+          <div class="site-panel">
             <div class="site-card__kicker">tempo juntos</div>
-            <div class="site-stat-grid" style="margin-top: 1rem;">
-              <template x-for="(value, key) in diff" :key="key">
-                <div class="site-stat">
-                  <div class="site-stat__value" x-text="String(value).padStart(2,'0')"></div>
-                  <div class="site-stat__label" x-text="key"></div>
+
+            <div style="margin-top: 0.9rem; display:flex; justify-content:center;">
+              <div class="countdown-card" x-data="loveTimer('2025-06-13T00:00:00-03:00')" x-init="init" aria-live="polite">
+                <div class="countdown-phrase">Cada segundo com você importa <span class="countdown-heart">♥</span></div>
+
+                <div class="countdown-grid" style="margin-top:0.6rem;">
+                  <template x-for="unit in ['years','months','days','hours','minutes','seconds']" :key="unit">
+                    <div class="countdown-unit">
+                      <div class="countdown-number" :class="{ 'is-anim': animated }" x-text="format(diff[unit])"></div>
+                      <div class="countdown-label" x-text="labelMap[unit]"></div>
+                    </div>
+                  </template>
                 </div>
-              </template>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <aside class="site-hero__frame">
-        <div class="site-hero__media"></div>
+        <div class="site-hero__media" style="display:flex;align-items:center;justify-content:center;">
+          <figure style="width:86%;max-width:420px;margin:0;border-radius:1rem;box-shadow:var(--shadow);background:linear-gradient(180deg,#fff,#f7f1ec);padding:0.6rem;">
+            <img src="images/WhatsApp%20Image%202026-05-30%20at%2021.30.28.jpeg" alt="Primeiro cinema" style="width:100%;display:block;border-radius:0.7rem;object-fit:cover;height:260px;">
+          </figure>
+        </div>
         <div class="site-quote">
           <p class="site-card__kicker">quadro de abertura</p>
           <h2 class="site-panel__title" style="margin-top: 0.55rem; font-size: clamp(1.4rem, 2vw, 2rem);">Uma cápsula do tempo com luz quente e memória viva.</h2>
-          <p class="site-copy" style="margin-top: 0.75rem;">Tudo aqui foi pensado para parecer íntimo, tátil e cinematográfico, como uma coleção de cenas guardadas com carinho.</p>
+
+            <div class="opening-frames" style="margin-top:0.9rem;">
+              <figure class="mini-polaroid">
+                <img id="opening-img-0" src="images/WhatsApp%20Image%202026-05-30%20at%2021.30.28.jpeg" alt="foto 1">
+              </figure>
+
+              <figure class="mini-polaroid">
+                <img id="opening-img-1" src="images/WhatsApp%20Image%202026-05-30%20at%2021.30.29%20(1).jpeg" alt="foto 2">
+              </figure>
+
+              <figure class="mini-polaroid">
+                <img id="opening-img-2" src="images/WhatsApp%20Image%202026-05-30%20at%2021.30.29.jpeg" alt="foto 3">
+              </figure>
+            </div>
         </div>
       </aside>
     </section>
@@ -349,8 +425,6 @@
     <section id="historia" class="site-section">
       <div class="site-section__heading">
         <p class="site-section__eyebrow">capsula do tempo</p>
-        <h2 class="site-section__title">Um álbum feito para respirar emoções.</h2>
-        <p class="site-section__subtitle">Tudo aqui foi pensado para parecer artesanal, íntimo e cuidadosamente guardado como uma lembrança que não pode ser esquecida.</p>
       </div>
 
       <div class="site-timeline-grid">
@@ -376,23 +450,19 @@
       <div class="site-section__heading">
         <p class="site-section__eyebrow">scrapbook digital</p>
         <h2 class="site-section__title">A galeria que parece tocável.</h2>
-        <p class="site-section__subtitle">Polaroids, fita, recortes, desordem bonita — como um álbum vivo, organizado pelo coração.</p>
       </div>
 
       <div class="site-gallery">
         <article class="site-gallery__card">
-          <div style="aspect-ratio: 4 / 5; border-radius: 1.2rem; background: linear-gradient(135deg, #f3d4d8, #f6efe8); border: 1px solid rgba(255,255,255,0.9);"></div>
-          <h3 class="site-panel__title" style="margin-top: 1rem; font-size: 1.2rem;">Primeiro encontro</h3>
+          <img src="images/WhatsApp%20Image%202026-05-30%20at%2021.30.28.jpeg" alt="Primeiro encontro" style="width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;border-radius:1.2rem;border:1px solid rgba(255,255,255,0.9);" />
           <p class="site-copy" style="margin-top: 0.45rem;">A lembrança que ainda parece luz de tela e sorriso preso no ar.</p>
         </article>
         <article class="site-gallery__card">
-          <div style="aspect-ratio: 4 / 5; border-radius: 1.2rem; background: linear-gradient(135deg, #f6e2cf, #fff8f2); border: 1px solid rgba(255,255,255,0.9);"></div>
-          <h3 class="site-panel__title" style="margin-top: 1rem; font-size: 1.2rem;">Dias tranquilos</h3>
+          <img src="images/WhatsApp%20Image%202026-05-30%20at%2021.30.29%20(1).jpeg" alt="Dias tranquilos" style="width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;border-radius:1.2rem;border:1px solid rgba(255,255,255,0.9);" />
           <p class="site-copy" style="margin-top: 0.45rem;">Os pequenos momentos que parecem simples, mas seguram o mundo inteiro.</p>
         </article>
         <article class="site-gallery__card">
-          <div style="aspect-ratio: 4 / 5; border-radius: 1.2rem; background: linear-gradient(135deg, #ecd5df, #f4e8de); border: 1px solid rgba(255,255,255,0.9);"></div>
-          <h3 class="site-panel__title" style="margin-top: 1rem; font-size: 1.2rem;">A melhor versão</h3>
+          <img src="images/WhatsApp%20Image%202026-05-30%20at%2021.30.29.jpeg" alt="A melhor versão" style="width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;border-radius:1.2rem;border:1px solid rgba(255,255,255,0.9);" />
           <p class="site-copy" style="margin-top: 0.45rem;">Cada foto guarda a prova de que viver junto é a parte mais bonita.</p>
         </article>
       </div>
@@ -607,5 +677,129 @@
       });
     }());
   </script>
+
+  <script>
+    function loveTimer(startIso) {
+      const start = new Date(startIso);
+      return {
+        diff: { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 },
+        labelMap: { years: 'anos', months: 'meses', days: 'dias', hours: 'horas', minutes: 'minutos', seconds: 'segundos' },
+        animated: false,
+        format(v) { return String(v).padStart(2, '0'); },
+        init() { this.update(); this._timer = setInterval(() => this.update(), 1000); },
+        update() {
+          const now = new Date();
+          let total = Math.floor((now - start) / 1000);
+
+          const years = Math.floor(total / (365 * 24 * 3600)); total -= years * 365 * 24 * 3600;
+          const months = Math.floor(total / (30 * 24 * 3600)); total -= months * 30 * 24 * 3600;
+          const days = Math.floor(total / (24 * 3600)); total -= days * 24 * 3600;
+          const hours = Math.floor(total / 3600); total -= hours * 3600;
+          const minutes = Math.floor(total / 60); const seconds = total - minutes * 60;
+
+          this.diff = { years, months, days, hours, minutes, seconds };
+
+          // simple visual pulse when numbers change
+          this.animated = true; setTimeout(() => { this.animated = false; }, 260);
+        },
+        destroy() { clearInterval(this._timer); }
+      };
+    }
+  </script>
+
+    <script>
+      (function () {
+        // list of images in public/images (URL-encoded spaces)
+        const images = [
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.28.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.29%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.29.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.30%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.30%20(2).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.30.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.31%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.31.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.32%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.32.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.33%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.33%20(2).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.33.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.34%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.34%20(2).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.34.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.35%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.35.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.37%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.37%20(2).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.37%20(3).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.37.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.38%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.38.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.39%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.39.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.41%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.41%20(2).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.41.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.42.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.43%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.43%20(2).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.43.jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.44%20(1).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.44%20(2).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.44%20(3).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.44%20(4).jpeg',
+          'images/WhatsApp%20Image%202026-05-30%20at%2021.30.44.jpeg'
+        ];
+
+        const frame = document.querySelector('.opening-frames');
+        const imgs = [document.getElementById('opening-img-0'), document.getElementById('opening-img-1'), document.getElementById('opening-img-2')];
+        let index = 0;
+
+        function showCurrent() {
+          const len = images.length;
+          imgs.forEach((el, i) => {
+            const src = images[(index + i) % len];
+            // fade out / in
+            el.style.transition = 'opacity 260ms ease, transform 260ms ease';
+            el.style.opacity = 0.06;
+            el.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+              el.src = src;
+              el.style.opacity = 1;
+              el.style.transform = 'scale(1)';
+            }, 180);
+          });
+        }
+
+        frame.addEventListener('click', () => {
+          index = (index + 1) % images.length;
+          showCurrent();
+        });
+
+        // allow keyboard navigation
+        frame.tabIndex = 0;
+        frame.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight' || e.key === 'Enter') { index = (index + 1) % images.length; showCurrent(); }
+          if (e.key === 'ArrowLeft') { index = (index - 1 + images.length) % images.length; showCurrent(); }
+        });
+
+        // automatic rotation every 5s with pause on hover/focus
+        let autoTimer = null;
+        function startAuto() {
+          stopAuto();
+          autoTimer = setInterval(() => { index = (index + 1) % images.length; showCurrent(); }, 5000);
+        }
+        function stopAuto() {
+          if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        }
+
+        frame.addEventListener('mouseenter', stopAuto);
+        frame.addEventListener('mouseleave', startAuto);
+        frame.addEventListener('focusin', stopAuto);
+        frame.addEventListener('focusout', startAuto);
+
+        startAuto();
+      }());
+    </script>
 </body>
 </html>

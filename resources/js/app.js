@@ -7,9 +7,18 @@ Alpine.data('loveTimer', (startedAt) => ({
   startedAt: new Date(startedAt),
   now: new Date(),
   tick: null,
+  animated: false,
+  labelMap: { years: 'anos', months: 'meses', days: 'dias', hours: 'horas', minutes: 'minutos', seconds: 'segundos' },
+  format(v) { return String(v).padStart(2, '0'); },
   init() {
     this.tick = setInterval(() => {
+      const prevSeconds = this.now.getSeconds();
       this.now = new Date();
+      // animate briefly when value updates
+      if (this.now.getSeconds() !== prevSeconds) {
+        this.animated = true;
+        setTimeout(() => { this.animated = false; }, 260);
+      }
     }, 1000);
   },
   get diff() {
@@ -26,6 +35,7 @@ Alpine.data('loveTimer', (startedAt) => ({
       months: months % 12,
       days: days % 30,
       hours: hours % 24,
+      minutes: minutes % 60,
       seconds: seconds % 60,
     };
   },
